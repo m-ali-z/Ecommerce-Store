@@ -22,7 +22,7 @@ const RegisterCard = () => {
   };
 
   return (
-    <div className="flex h-[28rem] w-[60%] md:w-[30rem] mx-auto border border-black p-4 rounded  items-center">
+    <div className="flex h-[28rem] w-[60%] md:w-[30rem] mx-auto border border-black p-4 rounded items-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full flex flex-col gap-8"

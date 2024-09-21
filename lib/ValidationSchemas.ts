@@ -15,3 +15,18 @@ export const signInSchema = z.object({
   email: z.string().email({ message: "A valid email is required" }),
   password: z.string().min(1),
 });
+
+export const productSchema = z.object({
+  name: z
+    .string()
+    .min(1, { message: "Product name is required" })
+    .max(100, { message: "Product name should not exceed 100 characters" }), // Product name
+  price: z
+    .number({ message: "Must be a number" })
+    .positive("Price must be greater than 0"),
+
+  category: z.string().min(1, { message: "Category is required" }), // Product category
+  quantity: z
+    .number({ message: "Must be a number" })
+    .positive("Price must be greater than 0"),
+});

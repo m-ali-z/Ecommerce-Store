@@ -25,7 +25,7 @@ const AuthCard = () => {
       </div>
       <div className="group mt-5 [perspective:1000rem]">
         <div
-          className={`shadow-xl relative w-full [transform-style:preserve-3d] transition-all duration-500 ${
+          className={`shadow-xl relative w-full [transform-style:preserve-3d] transition-all duration-1000 ${
             isChecked ? "[transform:rotateY(180deg)]" : ""
           }`}
         >

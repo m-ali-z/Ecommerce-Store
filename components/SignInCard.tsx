@@ -6,9 +6,10 @@ import Link from "next/link";
 import { signInSchema } from "@/lib/ValidationSchemas";
 import { SignInFormValues } from "@/types/user";
 import { signInUser } from "@/lib/actions";
+import { ZodFormattedError } from "zod";
 
 const SignInCard = () => {
-  const [errorMessage, setErrorMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const {
     handleSubmit,
     register,
@@ -18,7 +19,7 @@ const SignInCard = () => {
   });
 
   const onSubmit = async (data: SignInFormValues) => {
-    setErrorMessage(null);
+    setErrorMessage("");
     const res = await signInUser(data);
     if (res) {
       setErrorMessage(res);

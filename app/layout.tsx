@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Acme, Inter, Roboto } from "next/font/google";
 import "./globals.css";
-import AuthProvider from "@/context/AuthProvider";
 import Navbar from "@/components/Navbar";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Toaster } from "@/components/ui/toaster";
+const roboto = Roboto({ subsets: ["greek"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +21,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body id="bg-color" className={`${inter.className} h-screen`}>
+      <body id="bg-color" className={`${roboto.className} h-screen`}>
         <SessionProvider session={session}>
           <Navbar />
           {children}
