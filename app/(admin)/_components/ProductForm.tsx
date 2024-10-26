@@ -24,12 +24,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { productSchema } from "@/lib/ValidationSchemas";
 import * as z from "zod";
-import { addProductToDb } from "../actions";
+import { addProductToDb, updateProduct } from "../actions";
 import toast, { Toaster } from "react-hot-toast";
 
 interface ProductFormProps {
-  _id?: string;
-  title: string;
+  _id: string;
+  title?: string;
   name?: string;
   category?: string;
   price?: number;
@@ -76,11 +76,10 @@ const ProductForm = ({
       quantity: form.getValues("quantity"),
     };
 
-    const result = await addProductToDb(data);
+    const result = await updateProduct(data, _id);
     if (result) {
       toast.success("success", { duration: 2000 });
     }
-    console.log(result);
   };
 
   const handleDeleteImage = (key: number) => {
@@ -94,11 +93,11 @@ const ProductForm = ({
   };
 
   return (
-    <div className="w-[50%] m-auto my-20">
+    <div className={`${title === "Edit" ? "" : "w-[50%]"} m-auto my-20`}>
       <Toaster position="bottom-right" />
 
       <div className="h-full w-full bg-white p-8 rounded ">
-        <h1 className="font-bold text-2xl text-center mb-8">{title}</h1>
+        <h1 className="font-bold text-2xl text-center mb-8">{title} Product</h1>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -114,7 +113,7 @@ const ProductForm = ({
                     <Input
                       placeholder="Product Name"
                       {...field}
-                      className="w-[50%]"
+                      className={`${title !== "Edit" ? "w-[50%]" : ""}`}
                     />
                   </FormControl>
 
@@ -132,7 +131,9 @@ const ProductForm = ({
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    <SelectTrigger className="w-[180px]">
+                    <SelectTrigger
+                      className={`${title !== "Edit" ? "w-[180px]" : ""}`}
+                    >
                       <SelectValue placeholder="Category" />
                     </SelectTrigger>
                     <SelectContent>
@@ -156,7 +157,7 @@ const ProductForm = ({
                     <Input
                       placeholder="Enter Price"
                       {...field}
-                      className="w-[20%]"
+                      className={`${title !== "Edit" ? "w-[50%]" : ""}`}
                       required
                       type="number"
                       value={field.value || ""}
@@ -181,7 +182,7 @@ const ProductForm = ({
                     <Input
                       placeholder="Enter quantity"
                       {...field}
-                      className="w-[20%]"
+                      className={`${title !== "Edit" ? "w-[50%]" : ""}`}
                       required
                       type="number"
                       value={field.value || ""}

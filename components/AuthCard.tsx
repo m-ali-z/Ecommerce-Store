@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import RegisterCard from "./RegisterCard";
 import SignInCard from "./SignInCard";

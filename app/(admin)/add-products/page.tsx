@@ -60,7 +60,6 @@ const AddProduct = () => {
     if (result) {
       toast.success("success", { duration: 2000 });
     }
-    console.log(result);
   };
 
   const handleDeleteImage = (key: number) => {
@@ -178,6 +177,7 @@ const AddProduct = () => {
               )}
             />
             <div>
+              <FormLabel>Image</FormLabel>
               <div className="flex gap-2">
                 <Input
                   placeholder="Enter image url"

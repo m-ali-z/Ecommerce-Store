@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { getAllProductsForAdmin } from "../actions";
 import ProductsList from "../_components/ProductsList";
 import Link from "next/link";

@@ -5,8 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { signInSchema } from "@/lib/ValidationSchemas";
 import { SignInFormValues } from "@/types/user";
-import { signInUser } from "@/lib/actions";
-import { ZodFormattedError } from "zod";
+import { signInUser } from "@/lib/user";
 
 const SignInCard = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -23,7 +22,6 @@ const SignInCard = () => {
     const res = await signInUser(data);
     if (res) {
       setErrorMessage(res);
-      console.log(res);
     }
   };
 

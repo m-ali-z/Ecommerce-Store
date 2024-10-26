@@ -2,10 +2,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { registerSchema } from "@/lib/ValidationSchemas";
-
-import { registerUser, signInUser } from "@/lib/actions";
+import { registerUser } from "@/lib/user";
 import { RegisterFormValues } from "@/types/user";
 
 const RegisterCard = () => {

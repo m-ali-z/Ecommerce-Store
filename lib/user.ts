@@ -1,20 +1,11 @@
 "use server";
-import {
-  AddProductValues,
-  RegisterFormValues,
-  SignInFormValues,
-} from "@/types/user";
-import {
-  productSchema,
-  registerSchema,
-  signInSchema,
-} from "./ValidationSchemas";
-import { User } from "@/models/User";
-import { redirect } from "next/navigation";
+import { RegisterFormValues, SignInFormValues } from "@/types/user";
+import { registerSchema, signInSchema } from "./ValidationSchemas";
 import { connectDb } from "./db";
+import { User } from "@/models/User";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
-import { Product } from "@/models/Product";
+import { redirect } from "next/navigation";
 
 export const signInUser = async (formData: SignInFormValues) => {
   const email = formData.email;
@@ -72,4 +63,11 @@ export const registerUser = async (formData: RegisterFormValues) => {
 
   await User.create({ name, email, password });
   redirect("/");
+};
+
+export const getUserById = async (id: string) => {
+  await connectDb();
+  const user = await User.findOne({ _id: id });
+  if (!user) return null;
+  return user;
 };

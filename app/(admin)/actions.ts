@@ -4,7 +4,13 @@ import { Product } from "@/models/Product";
 export const getAllProductsForAdmin = async (): Promise<ProductType[]> => {
   await connectDb();
   const products = await Product.find({});
-  return products;
+  const plainProducts = products.map((product) => {
+    const plainProduct = product.toObject();
+    plainProduct._id = plainProduct._id.toString(); // Convert _id to a string
+    return plainProduct;
+  });
+
+  return plainProducts;
 };
 
 export const addProductToDb = async (formData: NewProductType) => {
@@ -29,7 +35,18 @@ export const addProductToDb = async (formData: NewProductType) => {
 };
 
 export const deleteProductFromDb = async (_id: string) => {
-  console.log(_id);
   await connectDb();
   await Product.deleteOne({ _id });
+};
+
+export const updateProduct = async (formData: NewProductType, _id: string) => {
+  await connectDb();
+
+  const updatedProduct = await Product.findByIdAndUpdate(
+    _id,
+    { $set: formData }, // Updates the fields with new data
+    { new: true, runValidators: true } // Option to return the updated document and validate schema
+  );
+
+  return { message: "Product added successfully" };
 };
